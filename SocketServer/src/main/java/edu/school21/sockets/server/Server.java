@@ -65,9 +65,10 @@ public class Server extends Thread {
                     in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
                     outputToClient("Hello from Server!");
+                    System.out.println("User joined the chat with thread: " + Thread.currentThread());
                     printFirstMenu();
 
-
+                    System.out.println("User logged out of the chat with thread: " + Thread.currentThread());
                     outputToClient("You have left the messenger.");
                 } catch (IOException e) {
                     throw new RuntimeException(e);

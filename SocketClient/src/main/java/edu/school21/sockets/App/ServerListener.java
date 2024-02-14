@@ -19,13 +19,18 @@ public class ServerListener extends Thread {
     public void run() {
 
         try {
+            JSONObject json;
+            String line = null;
+
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            JSONObject json = new JSONObject(in.readLine());
-            String line = json.getString("message");
-            while(line != null) {
-                json = new JSONObject(in.readLine());
-                line = json.getString("message");
-                System.out.println(line);
+
+            while(true) {
+                 line = in.readLine();
+                 if(line == null)
+                     break;
+                 json = new JSONObject(line);
+                String message = json.getString("message");
+                System.out.println(message);
             }
             System.exit(0);
         } catch (IOException e) {
